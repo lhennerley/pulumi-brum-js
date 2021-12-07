@@ -16,7 +16,6 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-          PULUMI_ROOT: deploy
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IS_PR_WORKFLOW: true
           COMMENT_ON_PR: 1
