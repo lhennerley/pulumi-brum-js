@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  - pull_request
+
+  preview:
+    name: Preview
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: pulumi/actions@v1
+        with:
+          command: preview
+          stack-name: dev
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          PULUMI_ROOT: deploy
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IS_PR_WORKFLOW: true
+          COMMENT_ON_PR: 1

@@ -1,11 +1,29 @@
-import * as gcp from "@pulumi/gcp";
+import * as pulumi from "@pulumi/pulumi";
+import * as docker from "@pulumi/docker";
 
-let greeting = new gcp.cloudfunctions.HttpCallbackFunction(
-  "greeting",
-  (req, res) => {
-    // Change this code to fit your needs!
-    res.send(`Greetings from ${req.body.name || "Google Cloud Functions"}!`);
-  }
-);
+import { Postgres } from "./postgres";
 
-export let url = greeting.httpsTriggerUrl;
+const stack = pulumi.getStack();
+const dbName = "pg-db";
+
+let databaseUrl;
+
+switch (stack) {
+  case "local":
+    const network = new docker.Network("net");
+    // Create a Postgres database in local docker network
+    databaseUrl = Postgres.create(dbName, {
+      type: "docker",
+      network: network,
+      version: "13.5",
+    });
+
+    break;
+  case "dev":
+    databaseUrl = Postgres.create(dbName, {
+      type: "gcp",
+      version: "13",
+    });
+}
+
+export const DATABASE_URL = databaseUrl;

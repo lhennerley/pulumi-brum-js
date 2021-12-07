@@ -1,10 +1,11 @@
 {
-    "name": "pulumi-brum-js",
-    "devDependencies": {
-        "@types/node": "^14"
-    },
-    "dependencies": {
-        "@pulumi/gcp": "^6.2.0",
-        "@pulumi/pulumi": "^3.0.0"
-    }
+  "name": "pulumi-brum-js",
+  "devDependencies": {
+    "@types/node": "^14"
+  },
+  "dependencies": {
+    "@pulumi/docker": "^3.1.0",
+    "@pulumi/gcp": "^6.2.0",
+    "@pulumi/pulumi": "^3.0.0"
+  }
 }

@@ -1,0 +1,4 @@
+config:
+  gcp:project: exploration-334409
+  pulumi-brum-js:dbPassword:
+    secure: AAABAN4X9dZesAf4z7fnJtHNxg0Ig5CRlSkLge/nkhUqymE0ggO49kGU3y8PjE0l
