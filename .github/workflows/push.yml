@@ -1,9 +1,16 @@
+name: CI
+
 on:
-  - pull_request
+  push:
+    branches:
+      - master
 
 jobs:
-  preview:
-    name: Preview
+  up:
+    env:
+      # TODO: Implement production concept
+      STACK_NAME: dev
+    name: Update
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -11,11 +18,7 @@ jobs:
           fetch-depth: 1
       - uses: pulumi/actions@v1
         with:
-          command: preview
-          stack-name: dev
+          command: up
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          IS_PR_WORKFLOW: true
-          COMMENT_ON_PR: 1

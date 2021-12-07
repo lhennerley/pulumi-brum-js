@@ -51,8 +51,7 @@ export class GcpPostgres extends Postgres {
       region: location,
       databaseVersion: `POSTGRES_${args.version}`,
       settings: {
-        // tier: 'db-g1-small',
-        tier: `db-f1-micro`,
+        tier: "db-g1-small",
       },
       deletionProtection: true,
       rootPassword: dbPassword,
